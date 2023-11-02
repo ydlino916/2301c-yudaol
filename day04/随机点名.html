@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            box-sizing: border-box;
+            padding: 10px;
+            /* background-color: pink; */
+        }
+
+        .box {
+            display: flex;
+            justify-content: space-between;
+            box-sizing: border-box;
+            padding: 50px 150px;
+        }
+
+        .left {
+            width: 502px;
+            display: flex;
+            box-sizing: border-box;
+            padding: 10px;
+            flex-wrap: wrap;
+            border: 1px solid #000;
+            border-radius: 3px;
+        }
+
+        .item {
+            width: 60px;
+            height: 30px;
+            margin: 10px;
+            box-sizing: border-box;
+            /* border: 1px solid #000; */
+            line-height: 30px;
+            text-align: center;
+            border-radius: 3px;
+            background-color: #ccc;
+        }
+
+        .right {
+            width: 400px;
+            box-sizing: border-box;
+            padding: 30px;
+            padding-top: 200px;
+        }
+
+        h3 {
+            margin: 20px 0;
+        }
+
+        button {
+            width: 60px;
+            height: 30px;
+            border-radius: 5px;
+            background-color: #ccc;
+            border: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="big">
+        <h1 style="text-align: center;">2301c班级点名器</h1>
+        <div class="box">
+            <div class="left">
+                <!-- <div class="item" onclick="on()"></div> -->
+            </div>
+            <div class="right">
+                <h4 class="time"></h4>
+                <h3 class="lists">名单:<span class="one" style="color: red;"></span> <span class="two"
+                        style="color: red;"></span></h3>
+                <button onclick="ones()">一名</button>
+                <button onclick="twos()">两名</button>
+                <button onclick="nan()">男</button>
+                <button onclick="nv()">女</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    let list = [
+        {
+            name: "蔡徐坤",
+            sex: "男"
+        },
+        {
+            name: "吴亦凡",
+            sex: "男"
+        },
+        {
+            name: "李易峰",
+            sex: "男"
+        },
+        {
+            name: "张艺兴",
+            sex: "男"
+        },
+        {
+            name: "张靓颖",
+            sex: "女"
+        },
+        {
+            name: "章若楠",
+            sex: "女"
+        },
+        {
+            name: "鞠婧祎",
+            sex: "女"
+        },
+        {
+            name: "刘德华",
+            sex: "男"
+        },
+        {
+            name: "薛之谦",
+            sex: "男"
+        },
+        {
+            name: "周杰伦",
+            sex: "男"
+        },
+        {
+            name: "王靖雯",
+            sex: "女"
+        },
+        {
+            name: "刘亦菲",
+            sex: "女"
+        },
+        {
+            name: "王一博",
+            sex: "男"
+        },
+        {
+            name: "权志龙",
+            sex: "男"
+        },
+        {
+            name: "范丞丞",
+            sex: "男"
+        },
+        {
+            name: "陈立农",
+            sex: "男"
+        },
+        {
+            name: "骆付增",
+            sex: "男"
+        },
+        {
+            name: "刘晓博",
+            sex: "男"
+        },
+        {
+            name: "闫锦豪",
+            sex: "男"
+        },
+        {
+            name: "娄艺潇",
+            sex: "女"
+        },
+        {
+            name: "李金铭",
+            sex: "女"
+        },
+        {
+            name: "张柏芝",
+            sex: "女"
+        },
+        {
+            name: "郭富城",
+            sex: "男"
+        },
+        {
+            name: "庄心妍",
+            sex: "女"
+        },
+        {
+            name: "彭于晏",
+            sex: "男"
+        },
+        {
+            name: "张学友",
+            sex: "男"
+        },
+        {
+            name: "陈奕迅",
+            sex: "男"
+        },
+        {
+            name: "林俊杰",
+            sex: "男"
+        },
+        {
+            name: "雷佳音",
+            sex: "男"
+        },
+        {
+            name: "高启强",
+            sex: "男"
+        },
+        {
+            name: "高启盛",
+            sex: "男"
+        },
+        {
+            name: "张惠妹",
+            sex: "女"
+        },
+        {
+            name: "徐佳莹",
+            sex: "女"
+        },
+        {
+            name: "王宝强",
+            sex: "男"
+        },
+        {
+            name: "张红雷",
+            sex: "男"
+        },
+        {
+            name: "陈慧娴",
+            sex: "女"
+        },
+        {
+            name: "张碧晨",
+            sex: "女"
+        },
+        {
+            name: "林更新",
+            sex: "男"
+        },
+        {
+            name: "黄子韬",
+            sex: "男"
+        },
+        {
+            name: "包贝尔",
+            sex: "男"
+        },
+        {
+            name: "萧敬腾",
+            sex: "男"
+        },
+        {
+            name: "郑润泽",
+            sex: "男"
+        },
+    ]
+    var nanlist = list.filter(i => i.sex == '男')
+    var nvlist = list.filter(i => i.sex == '女')
+    var left = document.querySelector('.left')
+    list.forEach((item, index) => {
+        left.innerHTML += `<div class="item""> ${item.name} </div>`
+    })
+    var items = document.querySelectorAll('.item')
+
+    // 封装函数
+    function fn(arr) {
+        var newarr = []
+        while (newarr.length < 1) {
+            var n = Math.floor(Math.random() * arr.length)
+            if (newarr.indexOf(arr[n]) == -1) {
+                newarr.push(arr[n])
+            }
+        }
+        console.log(newarr);
+        return newarr
+    }
+    var lists = document.querySelector('.lists')
+
+    // 获取随机颜色
+    function getRandomColor(flag) {
+        let r = Math.floor(Math.random() * 256)
+        let g = Math.floor(Math.random() * 256)
+        let b = Math.floor(Math.random() * 256)
+        let hexadecimal = '#' + r.toString(16) + g.toString(16) + b.toString(16)
+        let rgbFormat = 'rgb(' + r + ',' + g + ',' + b + ')'
+        if (flag == true) {
+            return hexadecimal
+        } else if (flag == false) {
+            return rgbFormat
+        }
+    }
+
+    console.log(getRandomColor(true))
+    console.log(getRandomColor(false))
+
+    // 更改随机颜色
+    function suicolor() {
+        var num = 20
+        let bgco = setInterval(() => {
+            if (num > 0) {
+                num--
+                console.log(num);
+                this.items.forEach((i) => {
+                    i.style.color = `${this.getRandomColor(true)}`
+                })
+            }
+        }, 100)
+        clearInterval(this.bgco)
+    }
+
+    var one = document.querySelector('.one')
+    var two = document.querySelector('.two')
+
+    // 随机点一名
+    function ones() {
+        this.suicolor()
+        setTimeout(function () {
+            let dan = Math.floor(Math.random() * list.length)
+            one.innerHTML = list[dan].name
+            two.innerHTML = ''
+        }, 2000)
+
+    }
+    // 随机点二名
+    function twos() {
+        this.suicolor()
+        setTimeout(function () {
+            let dan = Math.floor(Math.random() * list.length)
+            let shuang = Math.floor(Math.random() * list.length)
+            one.innerHTML = list[dan].name
+            two.innerHTML = list[shuang].name
+        }, 2000)
+    }
+
+    // 随机男
+    function nan() {
+        this.suicolor()
+        setTimeout(function () {
+            this.lists.innerHTML += `${this.fn(nanlist)[0].name} &nbsp`
+        }, 2000)
+    }
+    // 随机女
+    function nv() {
+        this.suicolor()
+        setTimeout(function () {
+            this.lists.innerHTML += `${this.fn(nvlist)[0].name} &nbsp`
+        }, 2000)
+    }
+
+    // 时间
+    let times = new Date().getTime()
+    console.log(new Date().toLocaleString(times));
+
+    // function timefn() {
+    //     setInterval(function () {
+    //         var time = document.querySelector('.time')
+    //         time.innerHTML = `${new Date().toLocaleString(times)}`
+    //     }, 1000)
+    // }
+
+    function timefn() {
+        var time = document.querySelector('.time')
+        time.innerHTML = `${new Date().toLocaleString(times)}`
+    }
+
+    setInterval(timefn, 1000)
+    timefn()
+
+</script>
+
+</html>
